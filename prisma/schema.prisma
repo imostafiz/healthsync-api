@@ -11,3 +11,46 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      UserRole
+  status    UserStatus
+  needPasswordReset Boolean 
+  admin     Admin?   @relation("AdminUser")
+
+
+  @@map("users")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  profilePhoto String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean
+  contactNumber String
+  user User @relation("AdminUser", fields: [email], references: [email])
+
+
+  @@map("admins")
+}
+
+enum UserRole {
+  PATIENT
+  DOCTOR
+  ADMIN
+  SUPER_ADMIN
+}
+enum UserStatus {
+  ACTIVE
+BLOCKED
+}
