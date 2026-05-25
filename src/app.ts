@@ -8,7 +8,7 @@ const app: Application = express();
 app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Server is running!");
+  res.send("Backend server is running!");
 });
 
 export default app;

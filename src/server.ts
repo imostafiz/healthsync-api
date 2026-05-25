@@ -6,7 +6,7 @@ const port = 3001;
 
 async function main() {}
 const server: Server = app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Backend server is running on http://localhost:${port}`);
 });
 
 main();
